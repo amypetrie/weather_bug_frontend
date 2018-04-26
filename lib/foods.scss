@@ -1,0 +1,99 @@
+%format-table {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+%format-row {
+  height: 25px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+}
+
+%format-header {
+  border: 1px solid black;
+  background-color: lightgrey;
+  padding-left: 5px;
+}
+
+.food-headers {
+  @extend %format-table;
+  @extend %format-row;
+
+  .name-header {
+    @extend %format-header;
+    width: 200px;
+  }
+
+  .calorie-header {
+    @extend %format-header;
+    width: 60px;
+    padding-right: 5px;
+    border-left: 0px;
+  }
+
+  .hidden {
+    width: 50px;
+  }
+}
+
+.food-item-row {
+  @extend %format-table;
+  @extend %format-row;
+
+  .food-item-name {
+    width: 200px;
+  }
+
+  .food-item-calories {
+    width: 50px;
+  }
+
+  .button-container {
+    width: 25px;
+
+    .food-item-delete-btn {
+      color: white;
+      height: 20px;
+      width: 20px;
+      border: 1px solid tomato;
+      border-radius: 30px;
+      background-color: tomato;
+      text-align: center;
+    }
+  }
+}
+
+#name-notice {
+  display: none;
+  color  : tomato;
+}
+
+#calories-notice {
+  display: none;
+  color: tomato;
+}
+
+#food-filter-input {
+  width: 243px;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-name-container input {
+  width: 243px;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-calories-container input {
+  width: 243px;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}

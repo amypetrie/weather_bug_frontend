@@ -1,0 +1,42 @@
+{
+  "name": "quantified-self-starter-kit",
+  "version": "1.0.0",
+  "description": "Starter kit for Turing School's BEE M4 Quantified Self Project",
+  "main": "index.js",
+  "proxy": "https://localhost:3000/",
+  "scripts": {
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turingschool-examples/game-time-starter-kit-FEm1.git"
+  },
+  "author": "Turing School of Software and Design",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turingschool-examples/quantified-self-starter-kit/issues"
+  },
+  "homepage": "https://github.com/turingschool-examples/quantified-self-starter-kit#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-preset-env": "^1.6.0",
+    "chai": "^3.5.0",
+    "chromedriver": "^2.27.2",
+    "css-loader": "^0.26.0",
+    "jquery": "^3.1.1",
+    "mocha": "^3.1.2",
+    "mocha-loader": "^1.0.0",
+    "node-libs-browser": "^1.0.0",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^4.1.1",
+    "selenium-webdriver": "^3.0.1",
+    "style-loader": "^0.13.1",
+    "webdriverjs": "^1.7.5",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
