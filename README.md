@@ -5,7 +5,7 @@
 1. Clone this starter kit repository and rename the repository to `quantified-self-fe` in one command
 
   ```shell
-  git clone git@github.com:turingschool-examples/qs-frontend-starter.git quantified-self-fe
+  git clone git@github.com:turingschool/qs-frontend-starter.git quantified-self-fe
   ```
 2. Change into the `quantified-self-fe` directory
 
@@ -67,9 +67,9 @@ In order to see your application running on production:
 
 5. Go to Settings
 
-6. Under the Github Pages section of Options, select 'master' as your source
+6. Under the Github Pages section of Options, select 'master' as your source and click `Save`
 
-Be sure to `npm run build` and commit before each push to master. A few seconds after you push up, you should be able to see your application at <https://your-github-username.github.io/quantified-self>.
+Be sure to `npm run build` and commit before each push to master. A few seconds after you push up, you should be able to see your application at <https://your-github-username.github.io/quantified-self-fe>.
 
 ## Built With
 
