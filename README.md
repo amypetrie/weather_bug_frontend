@@ -5,7 +5,7 @@
 1. Clone this starter kit repository and rename the repository to `quantified-self-fe` in one command
 
   ```shell
-  git clone git@github.com:turingschool/qs-frontend-starter.git quantified-self-fe
+  git clone git@github.com:turingschool-examples/qs-fe-starter-kit.git quantified-self-fe
   ```
 2. Change into the `quantified-self-fe` directory
 
@@ -20,7 +20,7 @@
 5. Add your new repository remote - **your remote URL and user name will be different in the command below**
 
   ```shell
-  git remote add origin git@github.com:neight-allen/quantified-self-fe.git
+  git remote add origin git@github.com:<YOUR GITHUB NAME>/quantified-self-fe.git
   ```
 
 6. Install the dependencies of the starter kit
@@ -57,17 +57,15 @@ This site will be served from GitHub Pages in production.
 
 In order to see your application running on production:
 
-1. Open `./lib/requests/qsAPI.js` and replace `YOUR URL HERE` with the base URL of your Quantified Self API running in production (e.g. the root of your Heroku app).
+1. From the command line, run `npm run build`.
 
-2. From the command line, run `npm run build`.
+2. Commit and push your application to GitHub.
 
-3. Commit and push your application to GitHub.
+3. Visit your repository on Github
 
-4. Visit your repository on Github
+4. Go to Settings
 
-5. Go to Settings
-
-6. Under the Github Pages section of Options, select 'master' as your source and click `Save`
+5. Under the Github Pages section of Options, select 'master' as your source and click `Save`
 
 Be sure to `npm run build` and commit before each push to master. A few seconds after you push up, you should be able to see your application at <https://your-github-username.github.io/quantified-self-fe>.
 
