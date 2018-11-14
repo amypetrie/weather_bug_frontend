@@ -1,7 +1,7 @@
 {
-  "name": "quantified-self-starter-kit",
+  "name": "self-directed-fe-starter",
   "version": "1.0.0",
-  "description": "Starter kit for Turing School's BEE M4 Quantified Self Project",
+  "description": "Starter kit for Turing School's BEE M4 Self-Directed Project",
   "main": "index.js",
   "proxy": "https://localhost:3000/",
   "scripts": {
