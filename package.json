@@ -31,12 +31,12 @@
     "mocha": "^3.1.2",
     "mocha-loader": "^1.0.0",
     "node-libs-browser": "^1.0.0",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.11.0",
     "sass-loader": "^4.1.1",
     "selenium-webdriver": "^3.0.1",
     "style-loader": "^0.13.1",
     "webdriverjs": "^1.7.5",
-    "webpack": "^1.14.0",
+    "webpack": "^1.15.0",
     "webpack-dev-server": "^1.16.2"
   }
 }
