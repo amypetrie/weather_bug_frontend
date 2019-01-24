@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="lib/styles.css">
+
   <title>Weather Bug</title>
+
 </head>
 <body>
 
 <h1>Welcome to Weather Bug!</h1>
 
-<div id="locationSearch">
+<div id="favorites"></div>
+
   <form id="locationSearchForm" onSubmit="return false;">
     <input type="text" id="locationSearchInput" placeholder="Denver, CO">
     <input type="button" value="Get Weather" id="submitLocation" onClick="processWeatherRequest()">
   </form>
-</div>
 
-<div class="weatherContainer">
 
+<div class="container row">
   <div class="boxOne">
     <div id="locationName"></div>
     <div id="currentTime"></div>
@@ -34,7 +40,9 @@
     <div id="uvIndex"></div>
     <div id="longWeatherBlurb"></div>
   </div>
+</div>
 
+<div class="container">
   <div class="boxThree">
     <div class="nextHours">
       <div id="hourTime"></div>
@@ -48,12 +56,12 @@
       <div id="weekdayLongDescription"></div>
     </div>
   </div>
-
 </div>
 
     <script
     src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'>
   </script>
   <script src="lib/index.js"></script>
+
 </body>
 </html>
