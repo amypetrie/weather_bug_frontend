@@ -1,16 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
-  <title>Quantified Self - Diary</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="lib/styles.css">
+
+  <title>Weather Bug</title>
+
 </head>
 <body>
-      <!--  the a tag below can link you to another HTML page  -->
-      <!--  if you click the button in the browser right now, you'll get an error because that is not a real file path -->
-      <a href="<file path"><button class="default-button">GO TO OTHER PAGE</button></a>
+
+<h1>Welcome to Weather Bug!</h1>
+
+<div id="favoritesContainer"><div id="favorites"></div></div>
+
+  <form id="locationSearchForm" onSubmit="return false;">
+    <input type="text" id="locationSearchInput" placeholder="Denver, CO">
+    <input type="button" value="Get Weather" id="submitLocation">
+  </form>
+
+<div class="container row">
+  <div class="boxOne">
+    <div id="locationName"></div>
+    <div id="currentTime"></div>
+    <div id="currentDate"></div>
+    <div id="currentTemp"></div>
+    <div id="shortWeatherBlurb"></div>
+    <div id="currentTempHigh"></div>
+    <div id="currentTempLow"></div>
+  </div>
+
+  <div class="boxTwo">
+    <div id="feelsLike"></div>
+    <div id="humidity"></div>
+    <div id="Visibility"></div>
+    <div id="uvIndex"></div>
+    <div id="longWeatherBlurb"></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="boxThree">
+    <div class="nextHours">
+      <div id="hourTime"></div>
+      <div id="forecastedTemp"></div>
+    </div>
+    <div class="nextDays">
+      <div id="weekdayName"></div>
+      <div id="weekdayHigh"></div>
+      <div id="weekdayLow"></div>
+      <div id="weekdayHumidity"></div>
+      <div id="weekdayLongDescription"></div>
+    </div>
+  </div>
+</div>
+
     <script
     src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'>
   </script>
-  <script src="main.bundle.js"></script>
+
+<script src="main.bundle.js"></script>
 </body>
 </html>
