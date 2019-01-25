@@ -90,7 +90,7 @@
 	}
 
 	function getUserApiKey() {
-	  userApiKey = "467cb9044730c0d11fb4ebd511a9";
+	  userApiKey = "";
 	}
 
 	function displayFavorites() {

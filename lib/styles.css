@@ -1,11 +1,29 @@
-body {
-
-  margin: 20px;
+body{
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
+  line-height: 1.5;
   color: #212529;
-  background-color: ;
+  background-color: #F4F7FA;
   width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-custom {
+    background-color: #81acc1;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand{
+    color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.navbar-custom ul a{
+    color: rgba(255,255,255,.5);
+}
+
+.container{
+  margin: 20px;
 }
 
 /*# sourceMappingURL=styles.css.map */
