@@ -86,25 +86,43 @@
 
 	function setUserVariabes() {
 	  getUserApiKey();
-	  getUserFavorites(userApiKey);
+	  getUserFavorites(userApiKey, displayFavorites);
 	}
 
 	function getUserApiKey() {
-	  userApiKey = "";
+	  userApiKey = "467cb9044730c0d11fb4ebd511a9";
 	}
 
 	function displayFavorites() {
+	  //   var favDropDown = document.getElementById("dropdown");
 	  var locations = userFavoritesObj.favoriteLocations;
 	  locations.forEach(function (e) {
 	    var name = e["attributes"]["location"];
-	    var newDiv = document.createElement("p");
-	    var newText = document.createTextNode("" + name);
-	    newDiv.appendChild(newText);
-	    document.getElementById("favoritesContainer").appendChild(newDiv);
+	    // var favOption = document.createElement('option');
+	    // favOption.text = `${name}`;
+	    // favOption.value = `${name}`;
+	    var favDropDown = document.getElementById("dropdown-menu");
+	    var addDropDownItem = function addDropDownItem(txt) {
+	      favDropDown.append('<li>' + txt + '</li>');
+	    };
+	    addDropDownItem(name);
 	  });
 	}
 
-	function getUserFavorites(api_key) {
+	// function AddItem()
+	// {
+	//     // Create an Option object
+	//     var opt = document.createElement("option");
+	//
+	//     // Assign text and value to Option object
+	//     opt.text = "New Value";
+	//     opt.value = "New Value";
+	//
+	//     // Add an Option object to Drop Down List Box
+	//     document.getElementById('<%=DropDownList.ClientID%>').options.add(opt);
+	// }
+
+	function getUserFavorites(api_key, callback) {
 	  var requestUrl = "" + apiUrl + "api/v1/favorites";
 	  var requestResponse = $.ajax({ url: "" + requestUrl,
 	    type: 'get',
@@ -113,7 +131,7 @@
 	    dataType: 'json',
 	    success: function success(res) {
 	      userFavoritesObj = new UserFavorites(res["data"]);
-	      displayFavorites();
+	      callback();
 	    },
 	    error: function error(res) {
 	      userFavoritesObj = "Error";
