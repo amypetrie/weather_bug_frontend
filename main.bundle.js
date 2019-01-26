@@ -48,7 +48,6 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	// var env = require("styles.css");
 	var getWeatherButton = document.getElementById("submitLocation");
 	var weatherInput = document.getElementById("locationSearchInput");
 	var apiUrl = "https://weather-bug.herokuapp.com/";
@@ -57,6 +56,7 @@
 	var weatherForecastObj = null;
 	var userApiKey = null;
 	var userFavoritesObj = null;
+	var favDropDownLink = document.getElementById("dropDownFavs");
 
 	window.onload = setUserVariabes();
 
@@ -86,7 +86,7 @@
 
 	function setUserVariabes() {
 	  getUserApiKey();
-	  getUserFavorites(userApiKey);
+	  getUserFavorites(userApiKey, displayFavorites);
 	}
 
 	function getUserApiKey() {
@@ -94,17 +94,41 @@
 	}
 
 	function displayFavorites() {
+	  //   var favDropDown = document.getElementById("dropdown");
 	  var locations = userFavoritesObj.favoriteLocations;
 	  locations.forEach(function (e) {
 	    var name = e["attributes"]["location"];
-	    var newDiv = document.createElement("p");
-	    var newText = document.createTextNode("" + name);
-	    newDiv.appendChild(newText);
-	    document.getElementById("favoritesContainer").appendChild(newDiv);
+	    // var favOption = document.createElement('option');
+	    // favOption.text = `${name}`;
+	    // favOption.value = `${name}`;
+	    var favDropDown = document.getElementById("menuFavs");
+	    var newFav = document.createElement("li");
+	    var favText = document.createTextNode("" + name);
+
+	    newFav.appendChild(favText);
+	    document.getElementById("menuFavs").appendChild(newFav);
+
+	    // var addDropDownItem = function( txt ) {
+	    //   favDropDown.appendChild( '<li>' + txt + '</li>' );
+	    // };
+	    // addDropDownItem(name);
 	  });
 	}
 
-	function getUserFavorites(api_key) {
+	// function AddItem()
+	// {
+	//     // Create an Option object
+	//     var opt = document.createElement("option");
+	//
+	//     // Assign text and value to Option object
+	//     opt.text = "New Value";
+	//     opt.value = "New Value";
+	//
+	//     // Add an Option object to Drop Down List Box
+	//     document.getElementById('<%=DropDownList.ClientID%>').options.add(opt);
+	// }
+
+	function getUserFavorites(api_key, callback) {
 	  var requestUrl = "" + apiUrl + "api/v1/favorites";
 	  var requestResponse = $.ajax({ url: "" + requestUrl,
 	    type: 'get',
@@ -113,7 +137,7 @@
 	    dataType: 'json',
 	    success: function success(res) {
 	      userFavoritesObj = new UserFavorites(res["data"]);
-	      displayFavorites();
+	      callback();
 	    },
 	    error: function error(res) {
 	      userFavoritesObj = "Error";
@@ -170,6 +194,18 @@
 	getWeatherButton.addEventListener("click", function () {
 	  processWeatherRequest();
 	});
+
+	// $('body').on('mouseover mouseout', '.dropdown', function(e) {
+	//     $(e.target).dropdown('toggle');
+	// });
+
+	favDropDownLink.addEventListener("click", function (event) {
+	  document.getElementById("menuFavs").classList.toggle('drop');
+	});
+	// reset after a short delay
+	// setTimeout(function() {
+	//   event.target.style.color = "";
+	// }, 500);
 
 /***/ })
 /******/ ]);

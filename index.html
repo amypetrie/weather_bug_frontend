@@ -4,7 +4,11 @@
 
   <meta charset="utf-8">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Changa:600|Gurajada" rel="stylesheet">  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="lib/styles.css">
 
   <title>Weather Bug</title>
@@ -12,9 +16,23 @@
 </head>
 <body>
 
-<h1>Welcome to Weather Bug!</h1>
-
-<div id="favoritesContainer"><div id="favorites"></div></div>
+  <header>
+  <nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WeatherBug</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="/">Home</a></li>
+      <li class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button" id="dropDownFavs" aria-haspopup="true" aria-expanded="false">Favorites<span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="menuFavs">
+          <ul id=favMenuList></ul>
+      </li>
+    </ul>
+  </div>
+  </nav>
+  </header>
 
   <form id="locationSearchForm" onSubmit="return false;">
     <input type="text" id="locationSearchInput" placeholder="Denver, CO">
@@ -57,10 +75,7 @@
   </div>
 </div>
 
-    <script
-    src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'>
-  </script>
-
 <script src="main.bundle.js"></script>
+
 </body>
 </html>
