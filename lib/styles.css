@@ -40,13 +40,16 @@ body{
 }
 
 .navbar-custom ul .active a{
-  color: #ccb67d; 
+  color: #ccb67d;
 }
 
 .navbar-custom ul a:hover{
-  background-color: #4c6e79; 
+  background-color: #4c6e79;
 }
 
+.drop{
+  display: block;
+}
 
 .container{
   margin: 20px;

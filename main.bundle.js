@@ -48,7 +48,6 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	// var env = require("styles.css");
 	var getWeatherButton = document.getElementById("submitLocation");
 	var weatherInput = document.getElementById("locationSearchInput");
 	var apiUrl = "https://weather-bug.herokuapp.com/";
@@ -57,6 +56,7 @@
 	var weatherForecastObj = null;
 	var userApiKey = null;
 	var userFavoritesObj = null;
+	var favDropDownLink = document.getElementById("dropDownFavs");
 
 	window.onload = setUserVariabes();
 
@@ -101,11 +101,17 @@
 	    // var favOption = document.createElement('option');
 	    // favOption.text = `${name}`;
 	    // favOption.value = `${name}`;
-	    var favDropDown = document.getElementById("dropdown-menu");
-	    var addDropDownItem = function addDropDownItem(txt) {
-	      favDropDown.append('<li>' + txt + '</li>');
-	    };
-	    addDropDownItem(name);
+	    var favDropDown = document.getElementById("menuFavs");
+	    var newFav = document.createElement("li");
+	    var favText = document.createTextNode("" + name);
+
+	    newFav.appendChild(favText);
+	    document.getElementById("menuFavs").appendChild(newFav);
+
+	    // var addDropDownItem = function( txt ) {
+	    //   favDropDown.appendChild( '<li>' + txt + '</li>' );
+	    // };
+	    // addDropDownItem(name);
 	  });
 	}
 
@@ -188,6 +194,18 @@
 	getWeatherButton.addEventListener("click", function () {
 	  processWeatherRequest();
 	});
+
+	// $('body').on('mouseover mouseout', '.dropdown', function(e) {
+	//     $(e.target).dropdown('toggle');
+	// });
+
+	favDropDownLink.addEventListener("click", function (event) {
+	  document.getElementById("menuFavs").classList.toggle('drop');
+	});
+	// reset after a short delay
+	// setTimeout(function() {
+	//   event.target.style.color = "";
+	// }, 500);
 
 /***/ })
 /******/ ]);
