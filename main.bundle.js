@@ -76,6 +76,9 @@
 	  this.visibility = weatherData["attributes"]["daily_forecast"]["visibility"];
 	  this.uvIndex = weatherData["attributes"]["daily_forecast"]["uv_index"];
 	  this.longDescription = weatherData["attributes"]["daily_forecast"]["daily_summary"];
+	  //box three
+	  this.nextHours = weatherData["attributes"]["hourly_forecast"];
+	  this.nextDays = weatherData["attributes"]["upcoming_forecast"];
 	};
 
 	var UserFavorites = function UserFavorites(favorites) {
@@ -133,6 +136,7 @@
 	      weatherForecastObj = new WeatherForecast(apiResponse);
 	      displayBoxOne();
 	      displayBoxTwo();
+	      displayBoxThree();
 	    },
 	    error: function error(res) {
 	      apiResponse = "Error";
@@ -159,10 +163,32 @@
 
 	function displayBoxThree() {
 	  displayNextHours();
-	  displayNextDays();
+	  // displayNextDays();
 	}
 
-	function displayNextHours() {}
+	function displayNextHours() {
+	  var hours = weatherForecastObj.nextHours;
+	  hours.forEach(function (e) {
+	    // container for an hour's attributes
+	    var hourDiv = document.createElement("div");
+	    //  time attribute
+	    var hour = e["time"];
+	    var hourTime = document.createElement("div");
+	    var timeText = document.createTextNode("" + hour);
+	    hourTime.appendChild(timeText);
+	    //add time to the container div
+	    hourDiv.appendChild(hourTime);
+
+	    // temp attribute
+	    var temp = e["temperature"];
+	    var hourTemp = document.createElement("div");
+	    var tempText = document.createTextNode("" + temp);
+	    hourTemp.appendChild(tempText);
+	    hourDiv.appendChild(hourTemp);
+
+	    document.getElementById("nextHours").appendChild(hourDiv);
+	  });
+	}
 
 	function displayDateTime() {
 	  // need to edit this to format unix time returned by DarkSky
