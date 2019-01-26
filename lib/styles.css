@@ -1,26 +1,52 @@
+.navbar-custom .navbar-brand{
+    color: #b37202;
+    font-size: 4.3rem;
+    padding: 0 15px;
+    height: 80px;
+    line-height: 80px;
+    margin-left: 20px;
+/*     font-family: 'Gurajada', serif; */
+
+    font-family: 'Changa', sans-serif;
+}
+
 body{
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-size: 1.5rem;
+  font-family: 'Gurajada', serif;
+  font-size: 2.3rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #F4F7FA;
+  background-color: #efeeed;
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
+
 .navbar-custom {
-    background-color: #81acc1;
+    background-color: #002B36;;
+    min-height: 80px;
 }
-/* change the brand and text color */
-.navbar-custom .navbar-brand{
-    color: rgba(255,255,255,.8);
-}
+
 /* change the link color */
 .navbar-custom ul a{
-    color: rgba(255,255,255,.5);
+    margin-right: 20px;
+    color: #fcf8e3;
+    font-size: 3.3rem;
+    padding-top: 26.5px;
+    padding-bottom: 26.5px;
+    line-height: 27px;
+    font-weight: bold;
 }
+
+.navbar-custom ul .active a{
+  color: #ccb67d; 
+}
+
+.navbar-custom ul a:hover{
+  background-color: #4c6e79; 
+}
+
 
 .container{
   margin: 20px;
