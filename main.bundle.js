@@ -94,39 +94,17 @@
 	}
 
 	function displayFavorites() {
-	  //   var favDropDown = document.getElementById("dropdown");
 	  var locations = userFavoritesObj.favoriteLocations;
 	  locations.forEach(function (e) {
 	    var name = e["attributes"]["location"];
-	    // var favOption = document.createElement('option');
-	    // favOption.text = `${name}`;
-	    // favOption.value = `${name}`;
 	    var favDropDown = document.getElementById("menuFavs");
 	    var newFav = document.createElement("li");
 	    var favText = document.createTextNode("" + name);
 
 	    newFav.appendChild(favText);
 	    document.getElementById("menuFavs").appendChild(newFav);
-
-	    // var addDropDownItem = function( txt ) {
-	    //   favDropDown.appendChild( '<li>' + txt + '</li>' );
-	    // };
-	    // addDropDownItem(name);
 	  });
 	}
-
-	// function AddItem()
-	// {
-	//     // Create an Option object
-	//     var opt = document.createElement("option");
-	//
-	//     // Assign text and value to Option object
-	//     opt.text = "New Value";
-	//     opt.value = "New Value";
-	//
-	//     // Add an Option object to Drop Down List Box
-	//     document.getElementById('<%=DropDownList.ClientID%>').options.add(opt);
-	// }
 
 	function getUserFavorites(api_key, callback) {
 	  var requestUrl = "" + apiUrl + "api/v1/favorites";
@@ -194,10 +172,6 @@
 	getWeatherButton.addEventListener("click", function () {
 	  processWeatherRequest();
 	});
-
-	// $('body').on('mouseover mouseout', '.dropdown', function(e) {
-	//     $(e.target).dropdown('toggle');
-	// });
 
 	favDropDownLink.addEventListener("click", function (event) {
 	  document.getElementById("menuFavs").classList.toggle('drop');
