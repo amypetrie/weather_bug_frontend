@@ -22,6 +22,21 @@ body{
   padding: 0;
 }
 
+.card{
+  display: flex;
+  margin: 20px;
+}
+
+.card div{
+  display: grid;
+  margin: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+#nextDays{
+ padding: 10px;
+}
 
 .navbar-custom {
     background-color: #002B36;;
