@@ -163,7 +163,7 @@
 
 	function displayBoxThree() {
 	  displayNextHours();
-	  // displayNextDays();
+	  displayNextDays();
 	}
 
 	function displayNextHours() {
@@ -173,26 +173,61 @@
 	  });
 	}
 
-	function displayHour(hour_time) {
+	function displayHour(hour_data) {
 	  var hourDiv = document.createElement("div");
 
-	  var hour = hour_time["time"];
+	  var hour = hour_data["time"];
 	  var hourTimeDiv = document.createElement("div");
 	  var timeText = document.createTextNode("" + hour);
-
-	  var hourTemp = hour_time["temperature"];
-	  var hourTempDiv = document.createElement("div");
-	  var tempText = document.createTextNode(hourTemp + " degrees");
-
-	  hourTempDiv.appendChild(tempText);
 	  hourTimeDiv.appendChild(timeText);
 	  hourDiv.appendChild(hourTimeDiv);
+
+	  var hourTemp = hour_data["temperature"];
+	  var hourTempDiv = document.createElement("div");
+	  var tempText = document.createTextNode(hourTemp + " degrees");
+	  hourTempDiv.appendChild(tempText);
 	  hourDiv.appendChild(hourTempDiv);
 
 	  document.getElementById("nextHours").appendChild(hourDiv);
 	}
 
-	function displayNextDays() {}
+	function displayNextDays() {
+	  var days = weatherForecastObj.nextDays.splice(0, 5);
+	  days.forEach(function (e) {
+	    displayUpcomingDay(e);
+	  });
+	}
+
+	function displayUpcomingDay(day_data) {
+	  var dayDiv = document.createElement("div");
+
+	  var dayName = day_data["time"];
+	  var dayNameDiv = document.createElement("div");
+	  var dayNameText = document.createTextNode("" + dayName);
+	  dayNameDiv.appendChild(dayNameText);
+	  dayDiv.appendChild(dayNameDiv);
+
+	  var day_high = day_data["temperature_high"];
+	  var day_low = day_data["temperature_low"];
+	  var dayHighLowDiv = document.createElement("div");
+	  var dayHighLowText = document.createTextNode("High: " + day_high + " / Low: " + day_low);
+	  dayHighLowDiv.appendChild(dayHighLowText);
+	  dayDiv.appendChild(dayHighLowDiv);
+
+	  var day_summary = day_data["summary"];
+	  var daySummaryDiv = document.createElement("div");
+	  var daySummaryText = document.createTextNode("" + day_summary);
+	  daySummaryDiv.appendChild(daySummaryText);
+	  dayDiv.appendChild(daySummaryDiv);
+
+	  var day_humidity = day_data["humidity"];
+	  var dayHumidityDiv = document.createElement("div");
+	  var dayHumidityText = document.createTextNode("Humidity: " + day_humidity);
+	  dayHumidityDiv.appendChild(dayHumidityText);
+	  dayDiv.appendChild(dayHumidityDiv);
+
+	  document.getElementById("nextDays").appendChild(dayDiv);
+	}
 
 	function displayDateTime() {
 	  // need to edit this to format unix time returned by DarkSky
