@@ -50,10 +50,11 @@
 
 	var getWeatherButton = document.getElementById("submitLocation");
 	var weatherInput = document.getElementById("locationSearchInput");
-	var apiUrl = "https://weather-bug.herokuapp.com/";
-	// var apiUrl = "http://localhost:3000/";
+	// var apiUrl = "https://weather-bug.herokuapp.com/";
+	var apiUrl = "http://localhost:3000/";
 	var apiResponse = null;
 	var weatherForecastObj = null;
+	var weatherLocationTimezone = null;
 	var userApiKey = null;
 	var userFavoritesObj = null;
 	var favDropDownLink = document.getElementById("dropDownFavs");
@@ -69,7 +70,8 @@
 	  this.currentTemp = weatherData["attributes"]["daily_forecast"]["current_temp"];
 	  this.currentHigh = weatherData["attributes"]["daily_forecast"]["temperature_high"];
 	  this.currentLow = weatherData["attributes"]["daily_forecast"]["temperature_low"];
-	  this.currentTime = weatherData["attributes"]["daily_forecast"]["time"];
+	  this.currentTime = weatherData["attributes"]["current_time"];
+	  this.timezone = weatherData["attributes"]["timezone"];
 	  // box two
 	  this.feelsLike = weatherData["attributes"]["daily_forecast"]["feels_like_temp"];
 	  this.humidity = weatherData["attributes"]["daily_forecast"]["humidity"];
@@ -79,7 +81,6 @@
 	  //box three
 	  this.nextHours = weatherData["attributes"]["hourly_forecast"];
 	  this.nextDays = weatherData["attributes"]["upcoming_forecast"];
-	  debugger;
 	};
 
 	var UserFavorites = function UserFavorites(favorites) {
@@ -135,6 +136,7 @@
 	    success: function success(res) {
 	      apiResponse = res["data"];
 	      weatherForecastObj = new WeatherForecast(apiResponse);
+	      weatherLocationTimezone = weatherForecastObj.timezone;
 	      displayBoxOne();
 	      displayBoxTwo();
 	      displayBoxThree();
@@ -146,8 +148,9 @@
 	}
 
 	function displayBoxOne() {
-	  var currentTime = weatherForecastObj.currentTime;
-	  timeConverter(current_time);
+	  var location_time = weatherForecastObj.currentTime;
+	  var currentDateTime = timeConverter(location_time);
+	  document.getElementById("currentDate").innerHTML = "" + currentDateTime;
 	  document.getElementById("locationName").innerHTML = "" + weatherForecastObj.locationName;
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + " degrees";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
@@ -169,7 +172,7 @@
 	}
 
 	function displayNextHours() {
-	  var hours = weatherForecastObj.nextHours.splice(0, 8);
+	  var hours = weatherForecastObj.nextHours.splice(1, 9);
 	  hours.forEach(function (e) {
 	    displayHour(e);
 	  });
@@ -231,9 +234,10 @@
 	  document.getElementById("nextDays").appendChild(dayDiv);
 	}
 
-	function timeConverter(unix_timestamp, timezone) {
+	function timeConverter(unix_timestamp) {
+	  var timezone = weatherLocationTimezone;
 	  var timestamp = parseInt(unix_timestamp, 10);
-	  var local_time = new Date(timestamp * 1000).toLocaleString("en-US", { timeZone: "" + timezone });
+	  var local_time = new Date(timestamp * 1000).toLocaleString("en-US", { timeZone: timezone });
 
 	  return local_time;
 	}
