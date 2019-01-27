@@ -223,8 +223,7 @@
 	  var day_high = day_data["temperature_high"];
 	  var day_low = day_data["temperature_low"];
 	  var dayHighLowDiv = document.createElement("div");
-	  var dayHighLowText = document.createTextNode("High: " + day_high + " / Low: " + day_low);
-	  dayHighLowDiv.appendChild(dayHighLowText);
+	  dayHighLowDiv.innerHTML = "High: " + day_high + "&deg;F / Low: " + day_low + "&deg;F";
 	  dayDiv.appendChild(dayHighLowDiv);
 
 	  var day_summary = day_data["summary"];
