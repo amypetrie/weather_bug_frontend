@@ -167,28 +167,32 @@
 	}
 
 	function displayNextHours() {
-	  var hours = weatherForecastObj.nextHours;
+	  var hours = weatherForecastObj.nextHours.splice(0, 8);
 	  hours.forEach(function (e) {
-	    // container for an hour's attributes
-	    var hourDiv = document.createElement("div");
-	    //  time attribute
-	    var hour = e["time"];
-	    var hourTime = document.createElement("div");
-	    var timeText = document.createTextNode("" + hour);
-	    hourTime.appendChild(timeText);
-	    //add time to the container div
-	    hourDiv.appendChild(hourTime);
-
-	    // temp attribute
-	    var temp = e["temperature"];
-	    var hourTemp = document.createElement("div");
-	    var tempText = document.createTextNode("" + temp);
-	    hourTemp.appendChild(tempText);
-	    hourDiv.appendChild(hourTemp);
-
-	    document.getElementById("nextHours").appendChild(hourDiv);
+	    displayHour(e);
 	  });
 	}
+
+	function displayHour(hour_time) {
+	  var hourDiv = document.createElement("div");
+
+	  var hour = hour_time["time"];
+	  var hourTimeDiv = document.createElement("div");
+	  var timeText = document.createTextNode("" + hour);
+
+	  var hourTemp = hour_time["temperature"];
+	  var hourTempDiv = document.createElement("div");
+	  var tempText = document.createTextNode(hourTemp + " degrees");
+
+	  hourTempDiv.appendChild(tempText);
+	  hourTimeDiv.appendChild(timeText);
+	  hourDiv.appendChild(hourTimeDiv);
+	  hourDiv.appendChild(hourTempDiv);
+
+	  document.getElementById("nextHours").appendChild(hourDiv);
+	}
+
+	function displayNextDays() {}
 
 	function displayDateTime() {
 	  // need to edit this to format unix time returned by DarkSky
