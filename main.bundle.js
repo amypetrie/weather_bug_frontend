@@ -50,8 +50,8 @@
 
 	var getWeatherButton = document.getElementById("submitLocation");
 	var weatherInput = document.getElementById("locationSearchInput");
-	// var apiUrl = "https://weather-bug.herokuapp.com/";
-	var apiUrl = "http://localhost:3000/";
+	var apiUrl = "https://weather-bug.herokuapp.com/";
+	// var apiUrl = "http://localhost:3000/";
 	var apiResponse = null;
 	var weatherForecastObj = null;
 	var weatherLocationTimezone = null;
@@ -96,10 +96,10 @@
 
 	function getUserApiKey() {
 	  // heroku app
-	  // userApiKey = "467cb9044730c0d11fb4ebd511a9";
+	  userApiKey = "467cb9044730c0d11fb4ebd511a9";
 
 	  //local host
-	  userApiKey = "29fc41e307adf31185a6563bf5bc";
+	  // userApiKey = "29fc41e307adf31185a6563bf5bc";
 	}
 
 	function displayFavorites() {
@@ -262,10 +262,6 @@
 	favDropDownLink.addEventListener("click", function (event) {
 	  document.getElementById("menuFavs").classList.toggle('drop');
 	});
-	// reset after a short delay
-	// setTimeout(function() {
-	//   event.target.style.color = "";
-	// }, 500);
 
 /***/ })
 /******/ ]);
