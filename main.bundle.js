@@ -157,7 +157,7 @@
 	  var currentTime = new Date(currentDateTime).toLocaleTimeString();
 
 	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentTime;
-	  document.getElementById("locationName").innerHTML = "" + weatherForecastObj.locationName;
+	  document.getElementById("locationName").innerHTML = weatherForecastObj.locationName + " " + '<button type="button" class="btn btn-default btn-default"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite</button>';
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + "&deg;F";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
 	  document.getElementById("currentTempHigh").innerHTML = "Temperature High: " + weatherForecastObj.currentHigh + "&deg;F";
