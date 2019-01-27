@@ -79,6 +79,7 @@
 	  //box three
 	  this.nextHours = weatherData["attributes"]["hourly_forecast"];
 	  this.nextDays = weatherData["attributes"]["upcoming_forecast"];
+	  debugger;
 	};
 
 	var UserFavorites = function UserFavorites(favorites) {
@@ -145,7 +146,8 @@
 	}
 
 	function displayBoxOne() {
-	  displayDateTime();
+	  var currentTime = weatherForecastObj.currentTime;
+	  timeConverter(current_time);
 	  document.getElementById("locationName").innerHTML = "" + weatherForecastObj.locationName;
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + " degrees";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
@@ -176,7 +178,7 @@
 	function displayHour(hour_data) {
 	  var hourDiv = document.createElement("div");
 
-	  var hour = hour_data["time"];
+	  var hour = timeConverter(hour_data["time"]);
 	  var hourTimeDiv = document.createElement("div");
 	  var timeText = document.createTextNode("" + hour);
 	  hourTimeDiv.appendChild(timeText);
@@ -192,7 +194,7 @@
 	}
 
 	function displayNextDays() {
-	  var days = weatherForecastObj.nextDays.splice(0, 5);
+	  var days = weatherForecastObj.nextDays.splice(1, 6);
 	  days.forEach(function (e) {
 	    displayUpcomingDay(e);
 	  });
@@ -201,7 +203,7 @@
 	function displayUpcomingDay(day_data) {
 	  var dayDiv = document.createElement("div");
 
-	  var dayName = day_data["time"];
+	  var dayName = timeConverter(day_data["time"]);
 	  var dayNameDiv = document.createElement("div");
 	  var dayNameText = document.createTextNode("" + dayName);
 	  dayNameDiv.appendChild(dayNameText);
@@ -229,9 +231,11 @@
 	  document.getElementById("nextDays").appendChild(dayDiv);
 	}
 
-	function displayDateTime() {
-	  // need to edit this to format unix time returned by DarkSky
-	  document.getElementById("currentTime").innerHTML = "Current Date and Time: " + weatherForecastObj.currentTime;
+	function timeConverter(unix_timestamp, timezone) {
+	  var timestamp = parseInt(unix_timestamp, 10);
+	  var local_time = new Date(timestamp * 1000).toLocaleString("en-US", { timeZone: "" + timezone });
+
+	  return local_time;
 	}
 
 	getWeatherButton.addEventListener("click", function () {
