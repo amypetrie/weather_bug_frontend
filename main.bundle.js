@@ -95,7 +95,11 @@
 	}
 
 	function getUserApiKey() {
-	  userApiKey = "467cb9044730c0d11fb4ebd511a9";
+	  // heroku app
+	  // userApiKey = "467cb9044730c0d11fb4ebd511a9";
+
+	  //local host
+	  userApiKey = "29fc41e307adf31185a6563bf5bc";
 	}
 
 	function displayFavorites() {
@@ -180,10 +184,11 @@
 
 	function displayHour(hour_data) {
 	  var hourDiv = document.createElement("div");
+	  var time = hour_data["time"];
+	  var currentHourTime = timeConverter(time);
 
-	  var hour = timeConverter(hour_data["time"]);
 	  var hourTimeDiv = document.createElement("div");
-	  var timeText = document.createTextNode("" + hour);
+	  var timeText = document.createTextNode("" + currentHourTime);
 	  hourTimeDiv.appendChild(timeText);
 	  hourDiv.appendChild(hourTimeDiv);
 
