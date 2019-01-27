@@ -154,17 +154,19 @@
 	function displayBoxOne() {
 	  var location_time = weatherForecastObj.currentTime;
 	  var currentDateTime = timeConverter(location_time);
-	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentDateTime;
+	  var currentTime = new Date(currentDateTime).toLocaleTimeString();
+
+	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentTime;
 	  document.getElementById("locationName").innerHTML = "" + weatherForecastObj.locationName;
-	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + " degrees";
+	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + "&deg;F";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
-	  document.getElementById("currentTempHigh").innerHTML = "Temperature High: " + weatherForecastObj.currentHigh + " degrees";
-	  document.getElementById("currentTempLow").innerHTML = "Temperature Low: " + weatherForecastObj.currentLow + " degrees";
+	  document.getElementById("currentTempHigh").innerHTML = "Temperature High: " + weatherForecastObj.currentHigh + "&deg;F";
+	  document.getElementById("currentTempLow").innerHTML = "Temperature Low: " + weatherForecastObj.currentLow + "&deg;F";
 	}
 
 	function displayBoxTwo() {
 	  document.getElementById("longWeatherBlurb").innerHTML = "Today: " + weatherForecastObj.longDescription;
-	  document.getElementById("feelsLike").innerHTML = "Feels Like: " + weatherForecastObj.feelsLike + " degrees";
+	  document.getElementById("feelsLike").innerHTML = "Feels Like: " + weatherForecastObj.feelsLike + "&deg;F";
 	  document.getElementById("humidity").innerHTML = "Humidity: " + weatherForecastObj.humidity + "%";
 	  document.getElementById("Visibility").innerHTML = "Visibility: " + weatherForecastObj.visibility + " mi.";
 	  document.getElementById("uvIndex").innerHTML = "UV Index: " + weatherForecastObj.uvIndex;
@@ -176,7 +178,7 @@
 	}
 
 	function displayNextHours() {
-	  var hours = weatherForecastObj.nextHours.splice(1, 9);
+	  var hours = weatherForecastObj.nextHours.splice(1, 8);
 	  hours.forEach(function (e) {
 	    displayHour(e);
 	  });
@@ -186,23 +188,23 @@
 	  var hourDiv = document.createElement("div");
 	  var time = hour_data["time"];
 	  var currentHourTime = timeConverter(time);
+	  var currentHour = new Date(currentHourTime).toLocaleTimeString();
 
 	  var hourTimeDiv = document.createElement("div");
-	  var timeText = document.createTextNode("" + currentHourTime);
+	  var timeText = document.createTextNode("" + currentHour);
 	  hourTimeDiv.appendChild(timeText);
 	  hourDiv.appendChild(hourTimeDiv);
 
 	  var hourTemp = hour_data["temperature"];
 	  var hourTempDiv = document.createElement("div");
-	  var tempText = document.createTextNode(hourTemp + " degrees");
-	  hourTempDiv.appendChild(tempText);
+	  hourTempDiv.innerHTML = hourTemp + " &deg;F";
 	  hourDiv.appendChild(hourTempDiv);
 
 	  document.getElementById("nextHours").appendChild(hourDiv);
 	}
 
 	function displayNextDays() {
-	  var days = weatherForecastObj.nextDays.splice(1, 6);
+	  var days = weatherForecastObj.nextDays.splice(1, 5);
 	  days.forEach(function (e) {
 	    displayUpcomingDay(e);
 	  });
@@ -233,7 +235,7 @@
 
 	  var day_humidity = day_data["humidity"];
 	  var dayHumidityDiv = document.createElement("div");
-	  var dayHumidityText = document.createTextNode("Humidity: " + day_humidity);
+	  var dayHumidityText = document.createTextNode("Humidity: " + day_humidity + "%");
 	  dayHumidityDiv.appendChild(dayHumidityText);
 	  dayDiv.appendChild(dayHumidityDiv);
 
