@@ -154,7 +154,7 @@
 	function displayBoxOne() {
 	  var location_time = weatherForecastObj.currentTime;
 	  var currentDateTime = timeConverter(location_time);
-	  document.getElementById("currentDate").innerHTML = "" + currentDateTime;
+	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentDateTime;
 	  document.getElementById("locationName").innerHTML = "" + weatherForecastObj.locationName;
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + " degrees";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
@@ -211,7 +211,8 @@
 	function displayUpcomingDay(day_data) {
 	  var dayDiv = document.createElement("div");
 
-	  var dayName = timeConverter(day_data["time"]);
+	  var day = timeConverter(day_data["time"]);
+	  var dayName = getDayName(day);
 	  var dayNameDiv = document.createElement("div");
 	  var dayNameText = document.createTextNode("" + dayName);
 	  dayNameDiv.appendChild(dayNameText);
@@ -245,6 +246,12 @@
 	  var local_time = new Date(timestamp * 1000).toLocaleString("en-US", { timeZone: timezone });
 
 	  return local_time;
+	}
+
+	function getDayName(date_obj) {
+	  var d = new Date(date_obj);
+	  var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	  return days[d.getDay()];
 	}
 
 	getWeatherButton.addEventListener("click", function () {
