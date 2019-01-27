@@ -76,6 +76,9 @@
 	  this.visibility = weatherData["attributes"]["daily_forecast"]["visibility"];
 	  this.uvIndex = weatherData["attributes"]["daily_forecast"]["uv_index"];
 	  this.longDescription = weatherData["attributes"]["daily_forecast"]["daily_summary"];
+	  //box three
+	  this.nextHours = weatherData["attributes"]["hourly_forecast"];
+	  this.nextDays = weatherData["attributes"]["upcoming_forecast"];
 	};
 
 	var UserFavorites = function UserFavorites(favorites) {
@@ -94,39 +97,17 @@
 	}
 
 	function displayFavorites() {
-	  //   var favDropDown = document.getElementById("dropdown");
 	  var locations = userFavoritesObj.favoriteLocations;
 	  locations.forEach(function (e) {
 	    var name = e["attributes"]["location"];
-	    // var favOption = document.createElement('option');
-	    // favOption.text = `${name}`;
-	    // favOption.value = `${name}`;
 	    var favDropDown = document.getElementById("menuFavs");
 	    var newFav = document.createElement("li");
 	    var favText = document.createTextNode("" + name);
 
 	    newFav.appendChild(favText);
 	    document.getElementById("menuFavs").appendChild(newFav);
-
-	    // var addDropDownItem = function( txt ) {
-	    //   favDropDown.appendChild( '<li>' + txt + '</li>' );
-	    // };
-	    // addDropDownItem(name);
 	  });
 	}
-
-	// function AddItem()
-	// {
-	//     // Create an Option object
-	//     var opt = document.createElement("option");
-	//
-	//     // Assign text and value to Option object
-	//     opt.text = "New Value";
-	//     opt.value = "New Value";
-	//
-	//     // Add an Option object to Drop Down List Box
-	//     document.getElementById('<%=DropDownList.ClientID%>').options.add(opt);
-	// }
 
 	function getUserFavorites(api_key, callback) {
 	  var requestUrl = "" + apiUrl + "api/v1/favorites";
@@ -155,6 +136,7 @@
 	      weatherForecastObj = new WeatherForecast(apiResponse);
 	      displayBoxOne();
 	      displayBoxTwo();
+	      displayBoxThree();
 	    },
 	    error: function error(res) {
 	      apiResponse = "Error";
@@ -184,7 +166,68 @@
 	  displayNextDays();
 	}
 
-	function displayNextHours() {}
+	function displayNextHours() {
+	  var hours = weatherForecastObj.nextHours.splice(0, 8);
+	  hours.forEach(function (e) {
+	    displayHour(e);
+	  });
+	}
+
+	function displayHour(hour_data) {
+	  var hourDiv = document.createElement("div");
+
+	  var hour = hour_data["time"];
+	  var hourTimeDiv = document.createElement("div");
+	  var timeText = document.createTextNode("" + hour);
+	  hourTimeDiv.appendChild(timeText);
+	  hourDiv.appendChild(hourTimeDiv);
+
+	  var hourTemp = hour_data["temperature"];
+	  var hourTempDiv = document.createElement("div");
+	  var tempText = document.createTextNode(hourTemp + " degrees");
+	  hourTempDiv.appendChild(tempText);
+	  hourDiv.appendChild(hourTempDiv);
+
+	  document.getElementById("nextHours").appendChild(hourDiv);
+	}
+
+	function displayNextDays() {
+	  var days = weatherForecastObj.nextDays.splice(0, 5);
+	  days.forEach(function (e) {
+	    displayUpcomingDay(e);
+	  });
+	}
+
+	function displayUpcomingDay(day_data) {
+	  var dayDiv = document.createElement("div");
+
+	  var dayName = day_data["time"];
+	  var dayNameDiv = document.createElement("div");
+	  var dayNameText = document.createTextNode("" + dayName);
+	  dayNameDiv.appendChild(dayNameText);
+	  dayDiv.appendChild(dayNameDiv);
+
+	  var day_high = day_data["temperature_high"];
+	  var day_low = day_data["temperature_low"];
+	  var dayHighLowDiv = document.createElement("div");
+	  var dayHighLowText = document.createTextNode("High: " + day_high + " / Low: " + day_low);
+	  dayHighLowDiv.appendChild(dayHighLowText);
+	  dayDiv.appendChild(dayHighLowDiv);
+
+	  var day_summary = day_data["summary"];
+	  var daySummaryDiv = document.createElement("div");
+	  var daySummaryText = document.createTextNode("" + day_summary);
+	  daySummaryDiv.appendChild(daySummaryText);
+	  dayDiv.appendChild(daySummaryDiv);
+
+	  var day_humidity = day_data["humidity"];
+	  var dayHumidityDiv = document.createElement("div");
+	  var dayHumidityText = document.createTextNode("Humidity: " + day_humidity);
+	  dayHumidityDiv.appendChild(dayHumidityText);
+	  dayDiv.appendChild(dayHumidityDiv);
+
+	  document.getElementById("nextDays").appendChild(dayDiv);
+	}
 
 	function displayDateTime() {
 	  // need to edit this to format unix time returned by DarkSky
@@ -194,10 +237,6 @@
 	getWeatherButton.addEventListener("click", function () {
 	  processWeatherRequest();
 	});
-
-	// $('body').on('mouseover mouseout', '.dropdown', function(e) {
-	//     $(e.target).dropdown('toggle');
-	// });
 
 	favDropDownLink.addEventListener("click", function (event) {
 	  document.getElementById("menuFavs").classList.toggle('drop');
