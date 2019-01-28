@@ -133,7 +133,7 @@
 	  });
 	}
 
-	function processWeatherRequest() {
+	function processWeatherRequest(callback) {
 	  var formattedLocation = weatherInput.value;
 	  var requestUrl = "" + apiUrl + "api/v1/forecast?location=" + formattedLocation;
 	  var requestResponse = $.ajax({ url: "" + requestUrl,
@@ -142,9 +142,10 @@
 	      apiResponse = res["data"];
 	      weatherForecastObj = new WeatherForecast(apiResponse);
 	      weatherLocationTimezone = weatherForecastObj.timezone;
-	      displayBoxOne(setFavoriteButton);
+	      displayBoxOne();
 	      displayBoxTwo();
 	      displayBoxThree();
+	      callback();
 	    },
 	    error: function error(res) {
 	      apiResponse = "Error";
@@ -152,22 +153,17 @@
 	  });
 	}
 
-	function displayBoxOne(callback) {
+	function displayBoxOne() {
 	  var location_time = weatherForecastObj.currentTime;
 	  var currentDateTime = timeConverter(location_time);
 	  var currentTime = new Date(currentDateTime).toLocaleTimeString();
 
 	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentTime;
-	  document.getElementById("locationName").innerHTML = weatherForecastObj.locationName + " " + '<button type="button" class="btn btn-default btn-default" id="favoriteButton"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite</button>';
+	  document.getElementById("locationName").innerHTML = weatherForecastObj.locationName + " " + '<button type="button" class="btn btn-default" id="favoriteButton"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite</button>';
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + "&deg;F";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
 	  document.getElementById("currentTempHigh").innerHTML = "Temperature High: " + weatherForecastObj.currentHigh + "&deg;F";
 	  document.getElementById("currentTempLow").innerHTML = "Temperature Low: " + weatherForecastObj.currentLow + "&deg;F";
-	  callback();
-	}
-
-	function setFavoriteButton(){
-	  var favoriteButton = document.getElementById("favoriteButton");
 	}
 
 	function displayBoxTwo() {
@@ -261,25 +257,24 @@
 	  return days[d.getDay()];
 	}
 
+	function setFavoriteButton() {
+	  favoriteButton = document.getElementById("favoriteButton");
+	  favoriteButton.addEventListener("click", function (event) {
+	    event.preventDefault();
+	    debugger;
+	    console.log("hi");
+	  });
+	}
+
 	getWeatherButton.addEventListener("click", function (event) {
 	  event.preventDefault();
-	  processWeatherRequest();
+	  processWeatherRequest(setFavoriteButton);
 	});
 
 	favDropDownLink.addEventListener("click", function (event) {
 	  event.preventDefault();
 	  document.getElementById("menuFavs").classList.toggle('drop');
 	});
-
-	favoriteButton.addEventListener("click", function (event) {
-	  event.preventDefault();
-	  console.log("hi");
-	});
-
-// 	document.getElementById("favoriteButton").addEventListener("click", function( event ){
-// 	  event.preventDefault();
-// 	  console.log("hi");
-// 	});
 
 	// const requestOptions = {
 	//   method: 'post',
