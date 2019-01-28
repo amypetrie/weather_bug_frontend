@@ -58,6 +58,7 @@
 	var userApiKey = null;
 	var userFavoritesObj = null;
 	var favDropDownLink = document.getElementById("dropDownFavs");
+	var favoriteButton = null;
 
 	window.onload = setUserVariabes();
 
@@ -106,13 +107,18 @@
 	  var locations = userFavoritesObj.favoriteLocations;
 	  locations.forEach(function (e) {
 	    var name = e["attributes"]["location"];
-	    var favDropDown = document.getElementById("menuFavs");
 	    var newFav = document.createElement("li");
-	    var favText = document.createTextNode("" + name);
+	    newFav.innerHTML = "" + name;
 
-	    newFav.appendChild(favText);
 	    document.getElementById("menuFavs").appendChild(newFav);
 	  });
+	}
+
+	function updateFavorites(location_name) {
+	  var newFav = document.createElement("li");
+	  newFav.innerHTML = "" + location_name;
+
+	  document.getElementById("menuFavs").appendChild(newFav);
 	}
 
 	function getUserFavorites(api_key, callback) {
@@ -132,7 +138,7 @@
 	  });
 	}
 
-	function processWeatherRequest() {
+	function processWeatherRequest(callback) {
 	  var formattedLocation = weatherInput.value;
 	  var requestUrl = "" + apiUrl + "api/v1/forecast?location=" + formattedLocation;
 	  var requestResponse = $.ajax({ url: "" + requestUrl,
@@ -144,6 +150,7 @@
 	      displayBoxOne();
 	      displayBoxTwo();
 	      displayBoxThree();
+	      callback();
 	    },
 	    error: function error(res) {
 	      apiResponse = "Error";
@@ -157,7 +164,7 @@
 	  var currentTime = new Date(currentDateTime).toLocaleTimeString();
 
 	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentTime;
-	  document.getElementById("locationName").innerHTML = "" + weatherForecastObj.locationName;
+	  document.getElementById("locationName").innerHTML = weatherForecastObj.locationName + " " + '<button type="button" class="btn btn-default" id="favoriteButton"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite</button>';
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + "&deg;F";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
 	  document.getElementById("currentTempHigh").innerHTML = "Temperature High: " + weatherForecastObj.currentHigh + "&deg;F";
@@ -255,13 +262,47 @@
 	  return days[d.getDay()];
 	}
 
-	getWeatherButton.addEventListener("click", function () {
-	  processWeatherRequest();
+	function setFavoriteButton() {
+	  favoriteButton = document.getElementById("favoriteButton");
+	  favoriteButton.addEventListener("click", function (event) {
+	    event.preventDefault();
+	    var curr_location = weatherForecastObj.locationName;
+	    postFavorite(curr_location);
+	  });
+	}
+
+	getWeatherButton.addEventListener("click", function (event) {
+	  event.preventDefault();
+	  processWeatherRequest(setFavoriteButton);
 	});
 
 	favDropDownLink.addEventListener("click", function (event) {
+	  event.preventDefault();
 	  document.getElementById("menuFavs").classList.toggle('drop');
 	});
+
+	function postFavorite(location_name) {
+	  fetch('https://weather-bug.herokuapp.com/api/v1/favorites', {
+	    method: 'POST',
+	    headers: { 'Content-Type': 'application/json' },
+	    body: JSON.stringify({
+	      "api_key": "467cb9044730c0d11fb4ebd511a9",
+	      "location": "" + location_name
+	    })
+	  }).then(updateFavorites(location_name)).catch(function (error) {
+	    console.log(error);
+	  });
+	}
+
+	//
+	// // Fetch call is nice and tidy on its own
+	// const postArticle = (event) => {
+	//   event.preventDefault()
+	//   return fetch('http://example.com/articles', requestOptions)
+	//     .then(handleResponse)
+	//     .then(appendArticle)
+	//     .catch(errorLog)
+	// }
 
 /***/ })
 /******/ ]);
