@@ -59,7 +59,6 @@ body{
 .card{
   display: flex;
   margin: 20px;
-
 }
 
 .card div{
@@ -69,7 +68,7 @@ body{
 }
 
 #currentWeatherInfo{
-  display:inline-flex;
+ display:flex;
 }
 
 #nextHours{
@@ -78,5 +77,9 @@ body{
 
 #nextDays{
   display:inline-flex;
+}
+
+.addBorder{
+  border: solid;
 }
 /*# sourceMappingURL=styles.css.map */
