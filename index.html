@@ -33,28 +33,29 @@
   </nav>
 </header>
 
-<div class="container">
+<div class="container" id="bodyContainer">
+
+<div class="container" id="locationSearch">
   <form id="locationSearchForm" onSubmit="return false;">
     <input type="text" id="locationSearchInput" placeholder="Denver, CO">
     <input type="button" value="Get Weather" id="submitLocation">
   </form>
 </div>
 
-<div class="container">
-  <div class="boxOne">
+<div class="container" id="currentWeatherInfo">
+<h1 id="title1"></h1>
+  <div class="card" id="boxOne">
     <div id="locationName"></div>
-    <div id="currentTime"></div>
     <div id="currentDate"></div>
     <div id="currentTemp"></div>
     <div id="shortWeatherBlurb"></div>
+  </div>
+
+<h1 id="title2"></h1>
+  <div class="card" id="boxTwo">
+    <div id="feelsLike"></div>
     <div id="currentTempHigh"></div>
     <div id="currentTempLow"></div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="boxTwo">
-    <div id="feelsLike"></div>
     <div id="humidity"></div>
     <div id="Visibility"></div>
     <div id="uvIndex"></div>
@@ -62,17 +63,11 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="boxThree">
-    <div class="card" id="nextHours"></div>
-    <div class="card" id="nextDays">
-      <div id="weekdayName"></div>
-      <div id="weekdayHigh"></div>
-      <div id="weekdayLow"></div>
-      <div id="weekdayHumidity"></div>
-      <div id="weekdayLongDescription"></div>
-    </div>
-  </div>
+<div class="container" id="boxThree">
+   <div class="card" id="nextHours"></div>
+   <div class="card" id="nextDays"></div>
+</div>
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
