@@ -116,9 +116,12 @@
 
 	function updateFavorites(location_name) {
 	  var newFav = document.createElement("li");
+	  var addedMsg = document.createElement("span");
 	  newFav.innerHTML = "" + location_name;
+	  addedMsg.innerHTML = "   " + location_name + " has been added to your Favorites";
 
 	  document.getElementById("menuFavs").appendChild(newFav);
+	  document.getElementById("locationName").appendChild(addedMsg);
 	}
 
 	function getUserFavorites(api_key, callback) {
