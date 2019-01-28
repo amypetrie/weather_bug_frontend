@@ -107,13 +107,18 @@
 	  var locations = userFavoritesObj.favoriteLocations;
 	  locations.forEach(function (e) {
 	    var name = e["attributes"]["location"];
-	    var favDropDown = document.getElementById("menuFavs");
 	    var newFav = document.createElement("li");
-	    var favText = document.createTextNode("" + name);
+	    newFav.innerHTML = "" + name;
 
-	    newFav.appendChild(favText);
 	    document.getElementById("menuFavs").appendChild(newFav);
 	  });
+	}
+
+	function updateFavorites(location_name) {
+	  var newFav = document.createElement("li");
+	  newFav.innerHTML = "" + location_name;
+
+	  document.getElementById("menuFavs").appendChild(newFav);
 	}
 
 	function getUserFavorites(api_key, callback) {
@@ -261,8 +266,8 @@
 	  favoriteButton = document.getElementById("favoriteButton");
 	  favoriteButton.addEventListener("click", function (event) {
 	    event.preventDefault();
-	    debugger;
-	    console.log("hi");
+	    var curr_location = weatherForecastObj.locationName;
+	    postFavorite(curr_location);
 	  });
 	}
 
@@ -276,11 +281,19 @@
 	  document.getElementById("menuFavs").classList.toggle('drop');
 	});
 
-	// const requestOptions = {
-	//   method: 'post',
-	//   headers: { 'Content-Type': 'application/json' },
-	//   body: JSON.stringify(article)
-	// }
+	function postFavorite(location_name) {
+	  fetch('https://weather-bug.herokuapp.com/api/v1/favorites', {
+	    method: 'POST',
+	    headers: { 'Content-Type': 'application/json' },
+	    body: JSON.stringify({
+	      "api_key": "467cb9044730c0d11fb4ebd511a9",
+	      "location": "" + location_name
+	    })
+	  }).then(updateFavorites(location_name)).catch(function (error) {
+	    console.log(error);
+	  });
+	}
+
 	//
 	// // Fetch call is nice and tidy on its own
 	// const postArticle = (event) => {
