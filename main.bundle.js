@@ -150,15 +150,19 @@
 	      apiResponse = res["data"];
 	      weatherForecastObj = new WeatherForecast(apiResponse);
 	      weatherLocationTimezone = weatherForecastObj.timezone;
-	      displayBoxOne();
-	      displayBoxTwo();
-	      displayBoxThree();
+	      displayAllLocationData();
 	      callback();
 	    },
 	    error: function error(res) {
 	      apiResponse = "Error";
 	    }
 	  });
+	}
+
+	function displayAllLocationData() {
+	  displayBoxOne();
+	  displayBoxTwo();
+	  clearBoxThree(displayBoxThree);
 	}
 
 	function displayBoxOne() {
@@ -192,6 +196,12 @@
 	  hours.forEach(function (e) {
 	    displayHour(e);
 	  });
+	}
+
+	function clearBoxThree(callback) {
+	  document.getElementById("nextDays").innerHTML = '';
+	  document.getElementById("nextHours").innerHTML = '';
+	  callback();
 	}
 
 	function displayHour(hour_data) {
