@@ -58,6 +58,7 @@
 	var userApiKey = null;
 	var userFavoritesObj = null;
 	var favDropDownLink = document.getElementById("dropDownFavs");
+	var favoriteButton = null;
 
 	window.onload = setUserVariabes();
 
@@ -141,7 +142,7 @@
 	      apiResponse = res["data"];
 	      weatherForecastObj = new WeatherForecast(apiResponse);
 	      weatherLocationTimezone = weatherForecastObj.timezone;
-	      displayBoxOne();
+	      displayBoxOne(setFavoriteButton);
 	      displayBoxTwo();
 	      displayBoxThree();
 	    },
@@ -151,17 +152,22 @@
 	  });
 	}
 
-	function displayBoxOne() {
+	function displayBoxOne(callback) {
 	  var location_time = weatherForecastObj.currentTime;
 	  var currentDateTime = timeConverter(location_time);
 	  var currentTime = new Date(currentDateTime).toLocaleTimeString();
 
 	  document.getElementById("currentDate").innerHTML = "Local Time: " + currentTime;
-	  document.getElementById("locationName").innerHTML = weatherForecastObj.locationName + " " + '<button type="button" class="btn btn-default btn-default"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite</button>';
+	  document.getElementById("locationName").innerHTML = weatherForecastObj.locationName + " " + '<button type="button" class="btn btn-default btn-default" id="favoriteButton"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Favorite</button>';
 	  document.getElementById("currentTemp").innerHTML = "Current Temperature: " + weatherForecastObj.currentTemp + "&deg;F";
 	  document.getElementById("shortWeatherBlurb").innerHTML = "Right Now: " + weatherForecastObj.shortDescription;
 	  document.getElementById("currentTempHigh").innerHTML = "Temperature High: " + weatherForecastObj.currentHigh + "&deg;F";
 	  document.getElementById("currentTempLow").innerHTML = "Temperature Low: " + weatherForecastObj.currentLow + "&deg;F";
+	  callback();
+	}
+
+	function setFavoriteButton(){
+	  var favoriteButton = document.getElementById("favoriteButton");
 	}
 
 	function displayBoxTwo() {
@@ -255,13 +261,40 @@
 	  return days[d.getDay()];
 	}
 
-	getWeatherButton.addEventListener("click", function () {
+	getWeatherButton.addEventListener("click", function (event) {
+	  event.preventDefault();
 	  processWeatherRequest();
 	});
 
 	favDropDownLink.addEventListener("click", function (event) {
+	  event.preventDefault();
 	  document.getElementById("menuFavs").classList.toggle('drop');
 	});
+
+	favoriteButton.addEventListener("click", function (event) {
+	  event.preventDefault();
+	  console.log("hi");
+	});
+
+// 	document.getElementById("favoriteButton").addEventListener("click", function( event ){
+// 	  event.preventDefault();
+// 	  console.log("hi");
+// 	});
+
+	// const requestOptions = {
+	//   method: 'post',
+	//   headers: { 'Content-Type': 'application/json' },
+	//   body: JSON.stringify(article)
+	// }
+	//
+	// // Fetch call is nice and tidy on its own
+	// const postArticle = (event) => {
+	//   event.preventDefault()
+	//   return fetch('http://example.com/articles', requestOptions)
+	//     .then(handleResponse)
+	//     .then(appendArticle)
+	//     .catch(errorLog)
+	// }
 
 /***/ })
 /******/ ]);
